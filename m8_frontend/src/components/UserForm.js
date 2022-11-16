@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from "../constants";
-import "./css/audiolanding.css";
+import AutoComplete from './AutoComplete';
 
 function UserForm() {
     const [inputs, setInputs] = useState({});
@@ -37,21 +37,40 @@ function UserForm() {
         });
 
     }
-
-    return (
+    const labelStyle = {
+        'display': 'inline-block',
+        'width': '170px',
+        'text-align': 'left',
+        'margin-top': '10px',
+    }
+    const center = {
+        'margin':'0 auto',
+        'width':'550px',
+        'grid-template-colums':'1fr',
         
-        <form onSubmit={handleSubmit}>
-        <label>Enter your name:
-            <input type="text" name="username" value={inputs.username} onChange={handleChange}/>
-        </label>
-        <label>Enter your age:
-            <input type="number" name="age" value={inputs.age} onChange={handleChange}/>
-        </label>
-        <label>Enter a profile picture (.png only)
-            <input type="file" name="img" accept='.png' onChange={handleChangeImg} />
-        </label>
-        <button type="submit">Upload</button>
-        </form>
+    }
+    return (
+        <div style={center}>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label style={labelStyle}>Enter your full name</label>
+                    <input type="text" name="username" value={inputs.username} onChange={handleChange} placeholder="Name"/>
+                </div>
+                <div>
+                    <label style={labelStyle}>Enter your age</label>
+                    <input type="number" name="age" value={inputs.age} onChange={handleChange} placeholder="Age"/>
+                </div>
+                <div>
+                    <label style={labelStyle}>Enter a profile picture</label>
+                    <input type="file" name="img" accept='.png' onChange={handleChangeImg}/>
+                </div>
+                <div>
+                    <label style={labelStyle}>Enter your hobbies</label>
+                    <AutoComplete suggestions={["Tennis", "Soccer", "Swimming", "Singing", "Sight-seeing"]}/>
+                </div>
+            <button type="submit">Upload</button>
+            </form>
+        </div>
     )
 }
 
