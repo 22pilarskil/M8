@@ -12,7 +12,7 @@ def test(request):
 @csrf_exempt 
 def generateUser(request):
     form = UserForm(request.POST, request.FILES)
-    print(request.POST)
+    print("HERE" +str(request.POST))
     if form.is_valid():
         print("Here")
         form.save()
@@ -23,5 +23,7 @@ def deleteAll(request):
     for file in os.listdir('./static'):
         os.remove('./static/' + file)
     User.objects.all().delete()
-    
     return JsonResponse({'success':True})
+
+def getLastAdded(request):
+    print(User.objects.last().img)

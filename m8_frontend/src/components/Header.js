@@ -1,8 +1,8 @@
 import React from "react";
-import { API_URL } from "../constants";
+import { STATIC_URL } from "../constants";
 
 function Header() {
-  const logo = API_URL + "static/Liam.png";
+  const logo = STATIC_URL + "logo.png";
   const logoStyle = {
     'width':'20%',
     'height':'auto'

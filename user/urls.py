@@ -10,5 +10,6 @@ urlpatterns = [
     path('', views.test),
     path('generateUser', views.generateUser),
     path('deleteAll', views.deleteAll),
+    path('getLast', views.getLastAdded),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

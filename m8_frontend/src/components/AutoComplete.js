@@ -98,9 +98,10 @@ class AutoComplete extends Component {
 
     if (showSuggestions && userInput) {
       if (filteredSuggestions.length) {
+        console.log(filteredSuggestions.length)
         suggestionsListComponent = (
           <ul class="suggestions">
-            {filteredSuggestions.map((suggestion, index) => {
+            {filteredSuggestions.slice(0, Math.min(filteredSuggestions.length, 3)).map((suggestion, index) => {
               let className;
 
               // Flag the active suggestion with a class
