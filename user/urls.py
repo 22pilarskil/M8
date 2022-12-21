@@ -9,7 +9,7 @@ app_name = 'user'
 urlpatterns = [
     path('', views.test),
     path('generateUser', views.generateUser),
-    path('deleteAll', views.deleteAll),
     path('getLast', views.getLastAdded),
+    path('queryUser', views.queryUser)
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
