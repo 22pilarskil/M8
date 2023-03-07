@@ -11,6 +11,7 @@ function UserSearch() {
     const hobbiesCSV = process.env.PUBLIC_URL + "hobbies.csv";
 
     const [hobbies, setHobby] = useState([]);
+    const [inputs, setInputs] = useState({});
     const [options, setOptions] = useState([]);
 
     async function fetchCsv() {
@@ -40,19 +41,28 @@ function UserSearch() {
         setHobby(newHobby);
     }
 
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({...values, [name]: value}))
+        console.log(value + name);
+    }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const formData = new FormData();
         formData.append('hobbies_str', hobbies)
+        formData.append('lower', inputs.lower)
+        formData.append('upper', inputs.upper)
         const config = {
             config: {
             'content-type': 'multipart/form-data',
             },
         };
-        axios.post(API_URL + "queryUser", formData, config).then(response => {
-            console.log(response.data.usernames)
+        axios.post(API_URL + "filter", formData, config).then(response => {
+            console.log(response.data.Users)
         });
 
     }
@@ -76,6 +86,12 @@ function UserSearch() {
                 <div style={blocks}>
                     <Autocomplete multiple limitTags={10} id="combo-box-demo" options={options} onChange={handleChangeHobby}
                         renderInput={(params) => <TextField name="Hobbies" {...params} label="Hobbies" />}/>
+                </div>
+                <div style={blocks}>
+                    <TextField type="number" name="lower" onChange={handleChange} label="Lower Age"/>
+                </div>
+                <div style={blocks}>
+                    <TextField type="number" name="upper" onChange={handleChange} label="Upper Age"/>
                 </div>
             <Button variant="contained" style={blocks} type="submit">Upload</Button>
             </form>

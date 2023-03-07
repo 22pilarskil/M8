@@ -85,7 +85,7 @@ function UserForm() {
             },
         };
         axios.post(API_URL + "generateUser", formData, config).then(response => {
-            console.log(response.data.success)
+            console.log(response.data.Users)
         });
 
     }

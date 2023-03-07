@@ -10,6 +10,6 @@ urlpatterns = [
     path('', views.test),
     path('generateUser', views.generateUser),
     path('getLast', views.getLastAdded),
-    path('queryUser', views.queryUser)
+    path('filter', views.filter)
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
